@@ -17,8 +17,8 @@ NC='\033[0m' # No Color
 COLS=`tput cols`
 
 
-TMP_O=${TMPDIR:-/tmp}/o
-TMP_E=${TMPDIR:-/tmp}/e
+STDOUT_FILE=${TMPDIR:-/tmp}/o
+STDERR_FILE=${TMPDIR:-/tmp}/e
 OUTVAL=
 ERRVAL=
 RETVAL=
@@ -140,6 +140,8 @@ EX_CONFIG=78
 
 #{{{ function report {
 function report {
+    rm -f $STDOUT_FILE $STDERR_FILE
+
     echo 
 
     if [ "$STOP_ON_FAIL" -ne "0" ]
@@ -182,11 +184,10 @@ function run {
     fi
 
     CMD="$@"
-    O="$("$@" >$TMP_O 2>$TMP_E)"
+    O="$("$@" >$STDOUT_FILE 2>$STDERR_FILE)"
     RETVAL=$?
-    OUTVAL=`cat $TMP_O`
-    ERRVAL=`cat $TMP_E`
-    rm $TMP_O $TMP_E
+    OUTVAL=`cat $STDOUT_FILE`
+    ERRVAL=`cat $STDERR_FILE`
 
     #make it pretty
     RUN_NAME=${BOLD}$RUN_NAME${NC}
