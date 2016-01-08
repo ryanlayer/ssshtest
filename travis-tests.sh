@@ -4,6 +4,8 @@ test -e ssshtest || wget -q https://raw.githubusercontent.com/ryanlayer/ssshtest
 
 . ssshtest
 
+set -o nounset
+
 STOP_ON_FAIL=0
 
 run test_in_stdout python -c "print 'example assert_in_stdout success'"

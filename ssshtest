@@ -176,16 +176,18 @@ function run {
     if [ "${#TESTS_TO_RUN[*]}" -eq 0 ]
     then
         FLAG=1
+	
+	else 
+	
+		for i in "${TESTS_TO_RUN[@]}"
+		do
+			if [ "$RUN_NAME" == "$i" ]
+			then
+				FLAG=1
+				break
+			fi
+		done
     fi
-
-    for i in "${TESTS_TO_RUN[@]}"
-    do
-        if [ "$RUN_NAME" == "$i" ]
-        then
-            FLAG=1
-            break
-        fi
-    done
 
     if [ "$FLAG" -eq 0 ]
     then
