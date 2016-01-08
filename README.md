@@ -18,10 +18,10 @@ Then write some tests:
 
 ```
 run test_for_success python -c "print 'zzz: example success'"
-assert_in_stdout "zzz" $LINENO
+assert_in_stdout "zzz"
 
 run test_for_stderr python -c "sys.stderr.write('zzz: example failure')"
-assert_in_stderr "xxx" $LINENO
+assert_in_stderr "xxx"
 ```
 
 Then simply run the bash file that contains those lines.
@@ -51,7 +51,7 @@ run a block of code. This must precede any of the testing functions below.
 + name for test.
 + code to run
 
-assert_equal (3)
+assert_equal (2)
 ----------------
 
 Assert that 2 things are equal:
@@ -60,72 +60,57 @@ Assert that 2 things are equal:
 
 + observed
 + expected
-+ $LINENO
 
 ```
-assert_equal 42 $((21 + 21)) $LINENO
+assert_equal 42 $((21 + 21))
 ```
 
-assert_stdout (1)
+assert_stdout (0)
 -----------------
 
 Assert that stdout is not empty
 
-###Arguments
-
-+ $LINENO
-
 ```
 run test_stdout python -c "print 'zzz: example success'"
-assert_stdout $LINENO
+assert_stdout
 ```
 
-assert_in_stdout (2)
+assert_in_stdout (1)
 --------------------
 
 Assert that stdout out contains this text.
 
 ```
 run test_in_stdout python -c "print 'zzz: example success'"
-assert_in_stdout "zzz" $LINENO
+assert_in_stdout "zzz"
 ```
 
 ###Arguments
 
 + text to match
-+ $LINENO
 
 
-assert_no_stdout (1)
+assert_no_stdout (0)
 --------------------
 
 Assert that stdout is empty
 
-###Arguments
-
-+ $LINENO
-
-```
 run test_empty_stdout python -c "import sys; sys.stderr.write('aaa')"
-assert_no_stdout $LINENO
+assert_no_stdout
 ```
 
 
-assert_stderr (1)
+assert_stderr (0)
 -----------------
 
 Assert that stderr is not empty
 
-###Arguments
-
-+ $LINENO
-
 ```
 run test_stderr python -c "import sys; sys.stderr.write('zzz: example success')"
-assert_stderr $LINENO
+assert_stderr
 ```
 
-assert_in_stderr (2)
+assert_in_stderr (1)
 --------------------
 
 Assert that stderr out contains this text.
@@ -133,28 +118,23 @@ Assert that stderr out contains this text.
 ###Arguments
 
 + text to match
-+ $LINENO
 
 ```
 run test_in_stderr python -c "import sys; sys.stderr.write('zzz: example success')"
-assert_in_stderr "zzz" $LINENO
+assert_in_stderr "zzz"
 ```
 
-assert_no_stderr (1)
+assert_no_stderr (0)
 --------------------
 
 Assert that stderr is empty
 
-###Arguments
-
-+ $LINENO
-
 ```
 run test_no_stderr python -c "print 'aaa'"
-assert_no_stderr $LINENO
+assert_no_stderr
 ```
 
-assert_exit_code (2)
+assert_exit_code (1)
 --------------------
 
 Assert that the program exited with a particular code
@@ -162,11 +142,10 @@ Assert that the program exited with a particular code
 ###Arguments
 
 + exit code
-+ $LINENO
 
 ```
 run test_exit_code python -c "import sys; sys.exit(33)"
-assert_exit_code 33 $LINENO
+assert_exit_code 33
 ```
 
 Variables
