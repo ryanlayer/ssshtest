@@ -174,6 +174,17 @@ STOP_ON_FAIL
 
 Set STOP_ON_FAIL=1 after sourcing `ssshtest` to stop on the first error. Default is to continue running
 
+STDOUT_FILE
+-----------
+
+`$STDOUT_FILE` is a file containing the $STDOUT from the last run command
+
+STDERR_FILE
+-----------
+
+`$STDERR_FILE` is a file containing the $STDERR from the last run command
+
+
 LICENSE
 =======
 
