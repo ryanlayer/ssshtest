@@ -95,21 +95,13 @@
         
             <li><a href="#run-2">run (2)</a></li>
         
-            <li><a href="#assert_equal-3">assert_equal (3)</a></li>
+            <li><a href="#assert_equal-2">assert_equal (2)</a></li>
         
-            <li><a href="#assert_stdout-1">assert_stdout (1)</a></li>
+            <li><a href="#assert_stdout-0">assert_stdout (0)</a></li>
         
-            <li><a href="#assert_in_stdout-2">assert_in_stdout (2)</a></li>
+            <li><a href="#assert_in_stdout-1">assert_in_stdout (1)</a></li>
         
-            <li><a href="#assert_no_stdout-1">assert_no_stdout (1)</a></li>
-        
-            <li><a href="#assert_stderr-1">assert_stderr (1)</a></li>
-        
-            <li><a href="#assert_in_stderr-2">assert_in_stderr (2)</a></li>
-        
-            <li><a href="#assert_no_stderr-1">assert_no_stderr (1)</a></li>
-        
-            <li><a href="#assert_exit_code-2">assert_exit_code (2)</a></li>
+            <li><a href="#assert_no_stdout-0">assert_no_stdout (0)</a></li>
         
     
         <li class="main "><a href="#variables">Variables</a></li>
@@ -139,10 +131,10 @@
 
 <p>Then write some tests:</p>
 <pre><code>run test_for_success python -c &quot;print 'zzz: example success'&quot;
-assert_in_stdout &quot;zzz&quot; $LINENO
+assert_in_stdout &quot;zzz&quot;
 
 run test_for_stderr python -c &quot;sys.stderr.write('zzz: example failure')&quot;
-assert_in_stderr &quot;xxx&quot; $LINENO
+assert_in_stderr &quot;xxx&quot;
 </code></pre>
 
 <p>Then simply run the bash file that contains those lines.</p>
@@ -161,90 +153,86 @@ assert_in_stderr &quot;xxx&quot; $LINENO
 <li>name for test.</li>
 <li>code to run</li>
 </ul>
-<h2 id="assert_equal-3">assert_equal (3)</h2>
+<h2 id="assert_equal-2">assert_equal (2)</h2>
 <p>Assert that 2 things are equal:</p>
 <h3 id="arguments_1">Arguments</h3>
 <ul>
 <li>observed</li>
 <li>expected</li>
-<li>$LINENO</li>
 </ul>
-<pre><code>assert_equal 42 $((21 + 21)) $LINENO
+<pre><code>assert_equal 42 $((21 + 21))
 </code></pre>
 
-<h2 id="assert_stdout-1">assert_stdout (1)</h2>
+<h2 id="assert_stdout-0">assert_stdout (0)</h2>
 <p>Assert that stdout is not empty</p>
-<h3 id="arguments_2">Arguments</h3>
-<ul>
-<li>$LINENO</li>
-</ul>
 <pre><code>run test_stdout python -c &quot;print 'zzz: example success'&quot;
-assert_stdout $LINENO
+assert_stdout
 </code></pre>
 
-<h2 id="assert_in_stdout-2">assert_in_stdout (2)</h2>
+<h2 id="assert_in_stdout-1">assert_in_stdout (1)</h2>
 <p>Assert that stdout out contains this text.</p>
 <pre><code>run test_in_stdout python -c &quot;print 'zzz: example success'&quot;
-assert_in_stdout &quot;zzz&quot; $LINENO
+assert_in_stdout &quot;zzz&quot;
 </code></pre>
 
-<h3 id="arguments_3">Arguments</h3>
+<h3 id="arguments_2">Arguments</h3>
 <ul>
 <li>text to match</li>
-<li>$LINENO</li>
 </ul>
-<h2 id="assert_no_stdout-1">assert_no_stdout (1)</h2>
+<h2 id="assert_no_stdout-0">assert_no_stdout (0)</h2>
 <p>Assert that stdout is empty</p>
-<h3 id="arguments_4">Arguments</h3>
-<ul>
-<li>$LINENO</li>
-</ul>
-<pre><code>run test_empty_stdout python -c &quot;import sys; sys.stderr.write('aaa')&quot;
-assert_no_stdout $LINENO
+<p>run test_empty_stdout python -c "import sys; sys.stderr.write('aaa')"
+assert_no_stdout</p>
+<pre><code>
+
+assert_stderr (0)
+-----------------
+
+Assert that stderr is not empty
+
 </code></pre>
 
-<h2 id="assert_stderr-1">assert_stderr (1)</h2>
-<p>Assert that stderr is not empty</p>
-<h3 id="arguments_5">Arguments</h3>
-<ul>
-<li>$LINENO</li>
-</ul>
-<pre><code>run test_stderr python -c &quot;import sys; sys.stderr.write('zzz: example success')&quot;
-assert_stderr $LINENO
+<p>run test_stderr python -c "import sys; sys.stderr.write('zzz: example success')"
+assert_stderr</p>
+<pre><code>
+assert_in_stderr (1)
+--------------------
+
+Assert that stderr out contains this text.
+
+###Arguments
+
++ text to match
+
 </code></pre>
 
-<h2 id="assert_in_stderr-2">assert_in_stderr (2)</h2>
-<p>Assert that stderr out contains this text.</p>
-<h3 id="arguments_6">Arguments</h3>
-<ul>
-<li>text to match</li>
-<li>$LINENO</li>
-</ul>
-<pre><code>run test_in_stderr python -c &quot;import sys; sys.stderr.write('zzz: example success')&quot;
-assert_in_stderr &quot;zzz&quot; $LINENO
+<p>run test_in_stderr python -c "import sys; sys.stderr.write('zzz: example success')"
+assert_in_stderr "zzz"</p>
+<pre><code>
+assert_no_stderr (0)
+--------------------
+
+Assert that stderr is empty
+
 </code></pre>
 
-<h2 id="assert_no_stderr-1">assert_no_stderr (1)</h2>
-<p>Assert that stderr is empty</p>
-<h3 id="arguments_7">Arguments</h3>
-<ul>
-<li>$LINENO</li>
-</ul>
-<pre><code>run test_no_stderr python -c &quot;print 'aaa'&quot;
-assert_no_stderr $LINENO
+<p>run test_no_stderr python -c "print 'aaa'"
+assert_no_stderr</p>
+<pre><code>
+assert_exit_code (1)
+--------------------
+
+Assert that the program exited with a particular code
+
+###Arguments
+
++ exit code
+
 </code></pre>
 
-<h2 id="assert_exit_code-2">assert_exit_code (2)</h2>
-<p>Assert that the program exited with a particular code</p>
-<h3 id="arguments_8">Arguments</h3>
-<ul>
-<li>exit code</li>
-<li>$LINENO</li>
-</ul>
-<pre><code>run test_exit_code python -c &quot;import sys; sys.exit(33)&quot;
-assert_exit_code 33 $LINENO
-</code></pre>
-
+<p>run test_exit_code python -c "import sys; sys.exit(33)"
+assert_exit_code 33
+```</p>
 <h1 id="variables">Variables</h1>
 <h2 id="stop_on_fail">STOP_ON_FAIL</h2>
 <p>Set STOP_ON_FAIL=1 after sourcing <code>ssshtest</code> to stop on the first error. Default is to continue running</p>
