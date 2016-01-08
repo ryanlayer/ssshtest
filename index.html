@@ -103,6 +103,14 @@
         
             <li><a href="#assert_no_stdout-0">assert_no_stdout (0)</a></li>
         
+            <li><a href="#assert_stderr-0">assert_stderr (0)</a></li>
+        
+            <li><a href="#assert_in_stderr-1">assert_in_stderr (1)</a></li>
+        
+            <li><a href="#assert_no_stderr-0">assert_no_stderr (0)</a></li>
+        
+            <li><a href="#assert_exit_code-1">assert_exit_code (1)</a></li>
+        
     
         <li class="main "><a href="#variables">Variables</a></li>
         
@@ -181,58 +189,42 @@ assert_in_stdout &quot;zzz&quot;
 </ul>
 <h2 id="assert_no_stdout-0">assert_no_stdout (0)</h2>
 <p>Assert that stdout is empty</p>
-<p>run test_empty_stdout python -c "import sys; sys.stderr.write('aaa')"
-assert_no_stdout</p>
-<pre><code>
-
-assert_stderr (0)
------------------
-
-Assert that stderr is not empty
-
+<pre><code>run test_empty_stdout python -c &quot;import sys; sys.stderr.write('aaa')&quot;
+assert_no_stdout
 </code></pre>
 
-<p>run test_stderr python -c "import sys; sys.stderr.write('zzz: example success')"
-assert_stderr</p>
-<pre><code>
-assert_in_stderr (1)
---------------------
-
-Assert that stderr out contains this text.
-
-###Arguments
-
-+ text to match
-
+<h2 id="assert_stderr-0">assert_stderr (0)</h2>
+<p>Assert that stderr is not empty</p>
+<pre><code>run test_stderr python -c &quot;import sys; sys.stderr.write('zzz: example success')&quot;
+assert_stderr
 </code></pre>
 
-<p>run test_in_stderr python -c "import sys; sys.stderr.write('zzz: example success')"
-assert_in_stderr "zzz"</p>
-<pre><code>
-assert_no_stderr (0)
---------------------
-
-Assert that stderr is empty
-
+<h2 id="assert_in_stderr-1">assert_in_stderr (1)</h2>
+<p>Assert that stderr out contains this text.</p>
+<h3 id="arguments_3">Arguments</h3>
+<ul>
+<li>text to match</li>
+</ul>
+<pre><code>run test_in_stderr python -c &quot;import sys; sys.stderr.write('zzz: example success')&quot;
+assert_in_stderr &quot;zzz&quot;
 </code></pre>
 
-<p>run test_no_stderr python -c "print 'aaa'"
-assert_no_stderr</p>
-<pre><code>
-assert_exit_code (1)
---------------------
-
-Assert that the program exited with a particular code
-
-###Arguments
-
-+ exit code
-
+<h2 id="assert_no_stderr-0">assert_no_stderr (0)</h2>
+<p>Assert that stderr is empty</p>
+<pre><code>run test_no_stderr python -c &quot;print 'aaa'&quot;
+assert_no_stderr
 </code></pre>
 
-<p>run test_exit_code python -c "import sys; sys.exit(33)"
+<h2 id="assert_exit_code-1">assert_exit_code (1)</h2>
+<p>Assert that the program exited with a particular code</p>
+<h3 id="arguments_4">Arguments</h3>
+<ul>
+<li>exit code</li>
+</ul>
+<pre><code>run test_exit_code python -c &quot;import sys; sys.exit(33)&quot;
 assert_exit_code 33
-```</p>
+</code></pre>
+
 <h1 id="variables">Variables</h1>
 <h2 id="stop_on_fail">STOP_ON_FAIL</h2>
 <p>Set STOP_ON_FAIL=1 after sourcing <code>ssshtest</code> to stop on the first error. Default is to continue running</p>
