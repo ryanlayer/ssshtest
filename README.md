@@ -8,6 +8,7 @@ ssshtest - **s**tupid **s**imple (ba)**sh** **test**ing
 To use `ssshtest` in your project just source it in your test file
 
 ```
+test -e ssshtest || wget -q https://raw.githubusercontent.com/ryanlayer/ssshtest/master/ssshtest
 . ssshtest
 ```
 
