@@ -1,0 +1,74 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "ssshtest - \ns\ntupid \ns\nimple (ba)\nsh\n \ntest\ning\n\n\nssshtest\n is designed to be practical and easy to use.\n\n\nTo use \nssshtest\n in your project just source it in your test file\n\n\n. ssshtest\n\n\n\n\nThen write some tests:\n\n\nrun python -c \nprint 'zzz: example success'\n\nassert_in_stdout \nzzz\n $LINENO\n\nrun python -c \nsys.stderr.write('zzz: example failure')\n\nassert_in_stderr \nxxx\n $LINENO\n\n\n\n\nThen simply run the bash file that contains those lines.\n\n\nFunctions\n\n\nrun (1)\n\n\nrun a block of code. This must precede any of the testing functions below.\n\n\nArguments\n\n\n\n\ncode to run\n\n\n\n\nassert_stdout (1)\n\n\nAssert that stdout is not empty\n\n\nArguments\n\n\n\n\n$LINENO\n\n\n\n\nrun python -c \nprint 'zzz: example success'\n\nassert_stdout $LINENO\n\n\n\n\nassert_in_stdout (2)\n\n\nAssert that stdout out contains this text.\n\n\nrun python -c \nprint 'zzz: example success'\n\nassert_in_stdout \nzzz\n $LINENO\n\n\n\n\nArguments\n\n\n\n\ntext to match\n\n\n$LINENO\n\n\n\n\nassert_no_stdout (1)\n\n\nAssert that stdout is empty\n\n\nArguments\n\n\n\n\n$LINENO\n\n\n\n\nrun python -c \nimport sys; sys.stderr.write('aaa')\n\nassert_no_stdout $LINENO\n\n\n\n\nassert_stderr (1)\n\n\nAssert that stderr is not empty\n\n\nArguments\n\n\n\n\n$LINENO\n\n\n\n\nrun python -c \nimport sys; sys.stderr.write('zzz: example success')\n\nassert_stderr $LINENO\n\n\n\n\nassert_in_stderr (2)\n\n\nAssert that stderr out contains this text.\n\n\nArguments\n\n\n\n\ntext to match\n\n\n$LINENO\n\n\n\n\nrun python -c \nimport sys; sys.stderr.write('zzz: example success')\n\nassert_in_stderr \nzzz\n $LINENO\n\n\n\n\nassert_no_stderr (1)\n\n\nAssert that stderr is empty\n\n\nArguments\n\n\n\n\n$LINENO\n\n\n\n\nrun python -c \nprint 'aaa'\n\nassert_no_stderr $LINENO\n\n\n\n\nassert_exit_code (2)\n\n\nAssert that the program exited with a particular code\n\n\nArguments\n\n\n\n\nexit code\n\n\n$LINENO\n\n\n\n\nrun python -c \nimport sys; sys.exit(33)\n\nassert_exit_code 33 $LINENO\n\n\n\n\nVariables\n\n\nSTOP_ON_FAIL\n\n\nSet STOP_ON_FAIL=1 after sourcing \nssshtest\n to stop on the first error. Default is to continue running\n\n\nLICENSE\n\n\nMIT LICENSE", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#ssshtest-stupid-simple-bash-testing", 
+            "text": "ssshtest  is designed to be practical and easy to use.  To use  ssshtest  in your project just source it in your test file  . ssshtest  Then write some tests:  run python -c  print 'zzz: example success' \nassert_in_stdout  zzz  $LINENO\n\nrun python -c  sys.stderr.write('zzz: example failure') \nassert_in_stderr  xxx  $LINENO  Then simply run the bash file that contains those lines.", 
+            "title": "ssshtest - stupid simple (ba)sh testing"
+        }, 
+        {
+            "location": "/#functions", 
+            "text": "", 
+            "title": "Functions"
+        }, 
+        {
+            "location": "/#run-1", 
+            "text": "run a block of code. This must precede any of the testing functions below.  Arguments   code to run", 
+            "title": "run (1)"
+        }, 
+        {
+            "location": "/#assert_stdout-1", 
+            "text": "Assert that stdout is not empty  Arguments   $LINENO   run python -c  print 'zzz: example success' \nassert_stdout $LINENO", 
+            "title": "assert_stdout (1)"
+        }, 
+        {
+            "location": "/#assert_in_stdout-2", 
+            "text": "Assert that stdout out contains this text.  run python -c  print 'zzz: example success' \nassert_in_stdout  zzz  $LINENO  Arguments   text to match  $LINENO", 
+            "title": "assert_in_stdout (2)"
+        }, 
+        {
+            "location": "/#assert_no_stdout-1", 
+            "text": "Assert that stdout is empty  Arguments   $LINENO   run python -c  import sys; sys.stderr.write('aaa') \nassert_no_stdout $LINENO", 
+            "title": "assert_no_stdout (1)"
+        }, 
+        {
+            "location": "/#assert_stderr-1", 
+            "text": "Assert that stderr is not empty  Arguments   $LINENO   run python -c  import sys; sys.stderr.write('zzz: example success') \nassert_stderr $LINENO", 
+            "title": "assert_stderr (1)"
+        }, 
+        {
+            "location": "/#assert_in_stderr-2", 
+            "text": "Assert that stderr out contains this text.  Arguments   text to match  $LINENO   run python -c  import sys; sys.stderr.write('zzz: example success') \nassert_in_stderr  zzz  $LINENO", 
+            "title": "assert_in_stderr (2)"
+        }, 
+        {
+            "location": "/#assert_no_stderr-1", 
+            "text": "Assert that stderr is empty  Arguments   $LINENO   run python -c  print 'aaa' \nassert_no_stderr $LINENO", 
+            "title": "assert_no_stderr (1)"
+        }, 
+        {
+            "location": "/#assert_exit_code-2", 
+            "text": "Assert that the program exited with a particular code  Arguments   exit code  $LINENO   run python -c  import sys; sys.exit(33) \nassert_exit_code 33 $LINENO", 
+            "title": "assert_exit_code (2)"
+        }, 
+        {
+            "location": "/#variables", 
+            "text": "", 
+            "title": "Variables"
+        }, 
+        {
+            "location": "/#stop_on_fail", 
+            "text": "Set STOP_ON_FAIL=1 after sourcing  ssshtest  to stop on the first error. Default is to continue running", 
+            "title": "STOP_ON_FAIL"
+        }, 
+        {
+            "location": "/#license", 
+            "text": "MIT LICENSE", 
+            "title": "LICENSE"
+        }
+    ]
+}
