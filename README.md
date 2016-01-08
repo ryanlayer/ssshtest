@@ -73,7 +73,7 @@ Assert that stdout is not empty
 + $LINENO
 
 ```
-run python -c "print 'zzz: example success'"
+run test_stdout python -c "print 'zzz: example success'"
 assert_stdout $LINENO
 ```
 
@@ -83,7 +83,7 @@ assert_in_stdout (2)
 Assert that stdout out contains this text.
 
 ```
-run python -c "print 'zzz: example success'"
+run test_in_stdout python -c "print 'zzz: example success'"
 assert_in_stdout "zzz" $LINENO
 ```
 
@@ -103,7 +103,7 @@ Assert that stdout is empty
 + $LINENO
 
 ```
-run python -c "import sys; sys.stderr.write('aaa')"
+run test_empty_stdout python -c "import sys; sys.stderr.write('aaa')"
 assert_no_stdout $LINENO
 ```
 
@@ -118,7 +118,7 @@ Assert that stderr is not empty
 + $LINENO
 
 ```
-run python -c "import sys; sys.stderr.write('zzz: example success')"
+run test_stderr python -c "import sys; sys.stderr.write('zzz: example success')"
 assert_stderr $LINENO
 ```
 
@@ -133,7 +133,7 @@ Assert that stderr out contains this text.
 + $LINENO
 
 ```
-run python -c "import sys; sys.stderr.write('zzz: example success')"
+run test_in_stderr python -c "import sys; sys.stderr.write('zzz: example success')"
 assert_in_stderr "zzz" $LINENO
 ```
 
@@ -147,7 +147,7 @@ Assert that stderr is empty
 + $LINENO
 
 ```
-run python -c "print 'aaa'"
+run test_no_stderr python -c "print 'aaa'"
 assert_no_stderr $LINENO
 ```
 
@@ -162,7 +162,7 @@ Assert that the program exited with a particular code
 + $LINENO
 
 ```
-run python -c "import sys; sys.exit(33)"
+run test_exit_code python -c "import sys; sys.exit(33)"
 assert_exit_code 33 $LINENO
 ```
 
