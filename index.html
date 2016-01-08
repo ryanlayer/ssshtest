@@ -93,7 +93,9 @@
     
         <li class="main "><a href="#functions">Functions</a></li>
         
-            <li><a href="#run-1">run (1)</a></li>
+            <li><a href="#run-2">run (2)</a></li>
+        
+            <li><a href="#assert_equal-3">assert_equal (3)</a></li>
         
             <li><a href="#assert_stdout-1">assert_stdout (1)</a></li>
         
@@ -123,30 +125,50 @@
             <div class="col-md-9" role="main">
 
 <h1 id="ssshtest-stupid-simple-bash-testing">ssshtest - <strong>s</strong>tupid <strong>s</strong>imple (ba)<strong>sh</strong> <strong>test</strong>ing</h1>
+<p><a href="http://ryanlayer.github.io/ssshtest/">docs</a></p>
 <p><code>ssshtest</code> is designed to be practical and easy to use.</p>
 <p>To use <code>ssshtest</code> in your project just source it in your test file</p>
 <pre><code>. ssshtest
 </code></pre>
 
 <p>Then write some tests:</p>
-<pre><code>run python -c &quot;print 'zzz: example success'&quot;
+<pre><code>run test_for_success python -c &quot;print 'zzz: example success'&quot;
 assert_in_stdout &quot;zzz&quot; $LINENO
 
-run python -c &quot;sys.stderr.write('zzz: example failure')&quot;
+run test_for_stderr python -c &quot;sys.stderr.write('zzz: example failure')&quot;
 assert_in_stderr &quot;xxx&quot; $LINENO
 </code></pre>
 
 <p>Then simply run the bash file that contains those lines.</p>
+<pre><code>$ bash mytests.sh
+</code></pre>
+
+<p>To run only certain tests, use:</p>
+<pre><code>base mytests.sh test_for_success test_42
+</code></pre>
+
 <h1 id="functions">Functions</h1>
-<h2 id="run-1">run (1)</h2>
+<h2 id="run-2">run (2)</h2>
 <p>run a block of code. This must precede any of the testing functions below.</p>
 <h3 id="arguments">Arguments</h3>
 <ul>
+<li>name for test.</li>
 <li>code to run</li>
 </ul>
+<h2 id="assert_equal-3">assert_equal (3)</h2>
+<p>Assert that 2 things are equal:</p>
+<h3 id="arguments_1">Arguments</h3>
+<ul>
+<li>observed</li>
+<li>expected</li>
+<li>$LINENO</li>
+</ul>
+<pre><code>assert_equal 42 $((21 + 21)) $LINENO
+</code></pre>
+
 <h2 id="assert_stdout-1">assert_stdout (1)</h2>
 <p>Assert that stdout is not empty</p>
-<h3 id="arguments_1">Arguments</h3>
+<h3 id="arguments_2">Arguments</h3>
 <ul>
 <li>$LINENO</li>
 </ul>
@@ -160,14 +182,14 @@ assert_stdout $LINENO
 assert_in_stdout &quot;zzz&quot; $LINENO
 </code></pre>
 
-<h3 id="arguments_2">Arguments</h3>
+<h3 id="arguments_3">Arguments</h3>
 <ul>
 <li>text to match</li>
 <li>$LINENO</li>
 </ul>
 <h2 id="assert_no_stdout-1">assert_no_stdout (1)</h2>
 <p>Assert that stdout is empty</p>
-<h3 id="arguments_3">Arguments</h3>
+<h3 id="arguments_4">Arguments</h3>
 <ul>
 <li>$LINENO</li>
 </ul>
@@ -177,7 +199,7 @@ assert_no_stdout $LINENO
 
 <h2 id="assert_stderr-1">assert_stderr (1)</h2>
 <p>Assert that stderr is not empty</p>
-<h3 id="arguments_4">Arguments</h3>
+<h3 id="arguments_5">Arguments</h3>
 <ul>
 <li>$LINENO</li>
 </ul>
@@ -187,7 +209,7 @@ assert_stderr $LINENO
 
 <h2 id="assert_in_stderr-2">assert_in_stderr (2)</h2>
 <p>Assert that stderr out contains this text.</p>
-<h3 id="arguments_5">Arguments</h3>
+<h3 id="arguments_6">Arguments</h3>
 <ul>
 <li>text to match</li>
 <li>$LINENO</li>
@@ -198,7 +220,7 @@ assert_in_stderr &quot;zzz&quot; $LINENO
 
 <h2 id="assert_no_stderr-1">assert_no_stderr (1)</h2>
 <p>Assert that stderr is empty</p>
-<h3 id="arguments_6">Arguments</h3>
+<h3 id="arguments_7">Arguments</h3>
 <ul>
 <li>$LINENO</li>
 </ul>
@@ -208,7 +230,7 @@ assert_no_stderr $LINENO
 
 <h2 id="assert_exit_code-2">assert_exit_code (2)</h2>
 <p>Assert that the program exited with a particular code</p>
-<h3 id="arguments_7">Arguments</h3>
+<h3 id="arguments_8">Arguments</h3>
 <ul>
 <li>exit code</li>
 <li>$LINENO</li>
