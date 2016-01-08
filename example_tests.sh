@@ -92,6 +92,7 @@ assert_fail_to_stderr $EX_NOINPUT
 
 #assert_equal
 # Success
+touch test.out
 run assert_equal python -c "f = open('test.out','w'); f.write('1\n2\n3\n');f.close();"
 assert_equal "$(cat test.out | wc -l)" 3 
 run assert_equal python -c "f = open('test.out','w'); f.write('1\n2\n3\n');f.close();"
