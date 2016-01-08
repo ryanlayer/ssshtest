@@ -4,6 +4,8 @@
 #  Program: ssshtest
 #  Authors : Ryan M Layer ryan.layer@gmail.com
 #            Brent S Pedersen bpederse@gmail.com
+
+# (c) 2015 - Ryan Layer, Brent Pedersen
 ############################################################
 
 RED='\033[0;31m'
