@@ -3,6 +3,8 @@ ssshtest - **s**tupid **s**imple (ba)**sh** **test**ing
 
 [docs](http://ryanlayer.github.io/ssshtest/)
 
+![example output](https://raw.githubusercontent.com/ryanlayer/ssshtest/master/screenshot.png)
+
 `ssshtest` is designed to be practical and easy to use.
 
 To use `ssshtest` in your project just source it in your test file
