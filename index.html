@@ -132,7 +132,8 @@
 <p><a href="http://ryanlayer.github.io/ssshtest/">docs</a></p>
 <p><code>ssshtest</code> is designed to be practical and easy to use.</p>
 <p>To use <code>ssshtest</code> in your project just source it in your test file</p>
-<pre><code>. ssshtest
+<pre><code>test -e ssshtest || wget -q https://raw.githubusercontent.com/ryanlayer/ssshtest/master/ssshtest
+. ssshtest
 </code></pre>
 
 <p>Then write some tests:</p>
@@ -176,13 +177,13 @@ assert_in_stderr &quot;xxx&quot; $LINENO
 <ul>
 <li>$LINENO</li>
 </ul>
-<pre><code>run python -c &quot;print 'zzz: example success'&quot;
+<pre><code>run test_stdout python -c &quot;print 'zzz: example success'&quot;
 assert_stdout $LINENO
 </code></pre>
 
 <h2 id="assert_in_stdout-2">assert_in_stdout (2)</h2>
 <p>Assert that stdout out contains this text.</p>
-<pre><code>run python -c &quot;print 'zzz: example success'&quot;
+<pre><code>run test_in_stdout python -c &quot;print 'zzz: example success'&quot;
 assert_in_stdout &quot;zzz&quot; $LINENO
 </code></pre>
 
@@ -197,7 +198,7 @@ assert_in_stdout &quot;zzz&quot; $LINENO
 <ul>
 <li>$LINENO</li>
 </ul>
-<pre><code>run python -c &quot;import sys; sys.stderr.write('aaa')&quot;
+<pre><code>run test_empty_stdout python -c &quot;import sys; sys.stderr.write('aaa')&quot;
 assert_no_stdout $LINENO
 </code></pre>
 
@@ -207,7 +208,7 @@ assert_no_stdout $LINENO
 <ul>
 <li>$LINENO</li>
 </ul>
-<pre><code>run python -c &quot;import sys; sys.stderr.write('zzz: example success')&quot;
+<pre><code>run test_stderr python -c &quot;import sys; sys.stderr.write('zzz: example success')&quot;
 assert_stderr $LINENO
 </code></pre>
 
@@ -218,7 +219,7 @@ assert_stderr $LINENO
 <li>text to match</li>
 <li>$LINENO</li>
 </ul>
-<pre><code>run python -c &quot;import sys; sys.stderr.write('zzz: example success')&quot;
+<pre><code>run test_in_stderr python -c &quot;import sys; sys.stderr.write('zzz: example success')&quot;
 assert_in_stderr &quot;zzz&quot; $LINENO
 </code></pre>
 
@@ -228,7 +229,7 @@ assert_in_stderr &quot;zzz&quot; $LINENO
 <ul>
 <li>$LINENO</li>
 </ul>
-<pre><code>run python -c &quot;print 'aaa'&quot;
+<pre><code>run test_no_stderr python -c &quot;print 'aaa'&quot;
 assert_no_stderr $LINENO
 </code></pre>
 
@@ -239,7 +240,7 @@ assert_no_stderr $LINENO
 <li>exit code</li>
 <li>$LINENO</li>
 </ul>
-<pre><code>run python -c &quot;import sys; sys.exit(33)&quot;
+<pre><code>run test_exit_code python -c &quot;import sys; sys.exit(33)&quot;
 assert_exit_code 33 $LINENO
 </code></pre>
 
