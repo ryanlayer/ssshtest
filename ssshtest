@@ -264,18 +264,20 @@ function assert_exit_code {
     
     if [ "$FLAG" -eq 0 ];then return; fi
 
+    LINE=$(caller | cut -d " " -f1)
+
     TOTAL=$((TOTAL + 1))
     E=$(print_exit_code $1)
     O=$(print_exit_code $RETVAL)
     if [ $RETVAL -ne $1 ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} EXIT CODE (LINE $2): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} EXIT CODE (LINE $LINE): $RUN_NAME"
         echo -e "-->\texpected $E, observed $O"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} EXIT CODE (LINE $2): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} EXIT CODE (LINE $LINE): $RUN_NAME"
         if [ $VERBOSE ] 
         then
             echo -e "-->\texpected $E, observed $O"
@@ -289,16 +291,18 @@ function assert_no_stdout {
 
     if [ "$FLAG" -eq 0 ];then return; fi
 
+    LINE=$(caller | cut -d " " -f1)
+
     TOTAL=$((TOTAL + 1))
     if [ -n "$OUTVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} NON-EMPTY STDOUT (LINE $1): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} NON-EMPTY STDOUT (LINE $LINE): $RUN_NAME"
         echo -e "-->\t$OUTVAL"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} NON-EMPTY STDOUT (LINE $1): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} NON-EMPTY STDOUT (LINE $LINE): $RUN_NAME"
     fi
 }
 #}}}
@@ -308,16 +312,18 @@ function assert_no_stderr {
 
     if [ "$FLAG" -eq 0 ];then return; fi
 
+    LINE=$(caller | cut -d " " -f1)
+
     TOTAL=$((TOTAL + 1))
     if [ -n "$ERRVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} NON-EMPTY STDERR(LINE $1): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} NON-EMPTY STDERR(LINE $LINE): $RUN_NAME"
         echo -e "-->\t$ERRVAL"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} EMPTY STDERR(LINE $1): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} EMPTY STDERR(LINE $LINE): $RUN_NAME"
     fi
 }
 #}}}
@@ -327,15 +333,17 @@ function assert_stderr {
 
     if [ "$FLAG" -eq 0 ];then return; fi
 
+    LINE=$(caller | cut -d " " -f1)
+
     TOTAL=$((TOTAL + 1))
     if [ -z "$ERRVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} EMPTY STDERR(LINE $1): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} EMPTY STDERR(LINE $LINE): $RUN_NAME"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} EMPTY STDERR(LINE $1): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} EMPTY STDERR(LINE $LINE): $RUN_NAME"
         if [ $VERBOSE ] 
         then
             echo -e "-->\t$ERRVAL"
@@ -349,15 +357,17 @@ function assert_stdout {
 
     if [ "$FLAG" -eq 0 ];then return; fi
 
+    LINE=$(caller | cut -d " " -f1)
+
     TOTAL=$((TOTAL + 1))
     if [ -z "$OUTVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} EMPTY STDOUT (LINE $1): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} EMPTY STDOUT (LINE $LINE): $RUN_NAME"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} NON-EMPTY STDOUT (LINE $1): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} NON-EMPTY STDOUT (LINE $LINE): $RUN_NAME"
         if [ $VERBOSE ] 
         then
             echo -e "-->\t$ERRVAL"
@@ -371,24 +381,26 @@ function assert_in_stderr {
 
     if [ "$FLAG" -eq 0 ];then return; fi
 
+    LINE=$(caller | cut -d " " -f1)
+
     TOTAL=$((TOTAL + 1))
     if [ -z "$ERRVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} EMPTY STDERR (LINE $2): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} EMPTY STDERR (LINE $LINE): $RUN_NAME"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         if [[ $ERRVAL == *"$1"* ]]
         then
             SUCCESSES=$((SUCCESSES + 1))
-            echo -e "${GREEN}SUCCESS${NC} STDERR CONTAINS \"$1\" (LINE $2): $RUN_NAME"
+            echo -e "${GREEN}SUCCESS${NC} STDERR CONTAINS \"$1\" (LINE $LINE): $RUN_NAME"
             if [ $VERBOSE ] 
             then
                 echo -e "-->\t$ERRVAL"
             fi
         else
             FAILS=$((FAILS + 1))
-            echo -e "${RED}FAILURE${NC} STDERR DOES NOT CONTAIN \"$1\" (LINE $2): $RUN_NAME"
+            echo -e "${RED}FAILURE${NC} STDERR DOES NOT CONTAIN \"$1\" (LINE $LINE): $RUN_NAME"
             echo -e "-->\t$ERRVAL"
             if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
         fi
@@ -401,24 +413,26 @@ function assert_in_stdout {
 
     if [ "$FLAG" -eq 0 ];then return; fi
 
+    LINE=$(caller | cut -d " " -f1)
+
     TOTAL=$((TOTAL + 1))
     if [ -z "$OUTVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} EMPTY STDOUT (LINE $2): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} EMPTY STDOUT (LINE $LINE): $RUN_NAME"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         if [[ $OUTVAL == *"$1"* ]]
         then
             SUCCESSES=$((SUCCESSES + 1))
-            echo -e "${GREEN}SUCCESS${NC} STDOUT CONTAINS \"$1\" (LINE $2): $RUN_NAME"
+            echo -e "${GREEN}SUCCESS${NC} STDOUT CONTAINS \"$1\" (LINE $LINE): $RUN_NAME"
             if [ $VERBOSE ] 
             then
                 echo -e "-->\t$OUTVAL"
             fi
         else
             FAILS=$((FAILS + 1))
-            echo -e "${RED}FAILURE${NC} STDOUT DOES NOT CONTAIN \"$1\" (LINE $2): $RUN_NAME"
+            echo -e "${RED}FAILURE${NC} STDOUT DOES NOT CONTAIN \"$1\" (LINE $LINE): $RUN_NAME"
             echo -e "-->\t$OUTVAL"
             if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
         fi
@@ -431,14 +445,16 @@ function assert_equal {
 
     if [ "$FLAG" -eq 0 ];then return; fi
 
+    LINE=$(caller | cut -d " " -f1)
+
     TOTAL=$((TOTAL + 1))
     if [ "$1" -eq "$2" ]
     then
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} \"$1\" == \"$2\" (LINE $3): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} \"$1\" == \"$2\" (LINE $LINE): $RUN_NAME"
     else
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} \"$1\" != \"$2\" (LINE $3): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} \"$1\" != \"$2\" (LINE $LINE): $RUN_NAME"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     fi
 }
