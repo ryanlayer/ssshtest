@@ -163,6 +163,7 @@ function report {
         printf "${GREEN}%-10s${NC}${BOLD}Successes${NC}\n" $SUCCESSES
     fi
 
+    exit $FAILS
 }
 #}}}
 
