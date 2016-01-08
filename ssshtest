@@ -200,9 +200,9 @@ function run {
     O="$("$@" >$STDOUT_FILE 2>$STDERR_FILE)"
     RETVAL=$?
     END=$(date +%s);
-    TOTAL=$((END-START))
+    TOTAL_TIME=$((END-START))
 
-    RUN_TIME="$TOTAL sec"
+    RUN_TIME="$TOTAL_TIME sec"
 
 
     OUTVAL=`cat $STDOUT_FILE`
