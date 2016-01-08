@@ -97,3 +97,8 @@ run assert_equal python -c "f = open('test.out','w'); f.write('1\n2\n3\n');f.clo
 # Failure
 assert_equal "$(cat test.out | wc -l)" 4 $LINENO
 rm test.out
+
+#using STDOUT_FILE
+run use_stdout_file python -c "print '1\n2\n3';"
+assert_equal "$(cat $STDOUT_FILE | wc -l)" 3 $LINENO
+
