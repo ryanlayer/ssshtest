@@ -1,0 +1,7 @@
+site_name: ssshtest
+site_url: https://github.com/brentp/vcfanno
+repo_url: https://github.com/brentp/vcfanno
+pages:
+- Home: index.md
+theme: simplex
+
