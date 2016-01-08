@@ -1,6 +1,8 @@
 ssshtest - **s**tupid **s**imple (ba)**sh** **test**ing
 =======================================================
 
+[![Build Status](https://travis-ci.org/ryanlayer/ssshtest.svg?branch=master)](https://travis-ci.org/ryanlayer/ssshtest)
+
 [docs](http://ryanlayer.github.io/ssshtest/)
 
 ![example output](https://raw.githubusercontent.com/ryanlayer/ssshtest/master/screenshot.png)
@@ -35,6 +37,10 @@ To run only certain tests, use:
 ```
 base mytests.sh test_for_success test_42
 ```
+
+
+For an example of how to use **travis** continuous integration tests, our [.travis.yml](https://github.com/ryanlayer/ssshtest/blob/master/.travis.yml)
+
 
 
 
