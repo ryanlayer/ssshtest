@@ -17,8 +17,8 @@ NC='\033[0m' # No Color
 COLS=`tput cols`
 
 
-TMP_O=$TMPDIR/o
-TMP_E=$TMPDIR/e
+TMP_O=${TMPDIR:-/tmp}/o
+TMP_E=${TMPDIR:-/tmp}/e
 OUTVAL=
 ERRVAL=
 RETVAL=
