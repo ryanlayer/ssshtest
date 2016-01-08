@@ -153,8 +153,16 @@ function report {
     fi
 
     printf "${NC}%-10s${NC}Tests\n" $TOTAL
-    printf "${RED}%-10s${NC}Failures\n" $FAILS
-    printf "${GREEN}%-10s${NC}Successes\n" $SUCCESSES
+
+    if [ "$FAILS" -ne "0" ]
+    then
+        printf "${RED}%-10s${NC}${BOLD}Failures${NC}\n" $FAILS
+        printf "${GREEN}%-10s${NC}Successes\n" $SUCCESSES
+    else
+        printf "${RED}%-10s${NC}Failures\n" $FAILS
+        printf "${GREEN}%-10s${NC}${BOLD}Successes${NC}\n" $SUCCESSES
+    fi
+
 }
 #}}}
 
@@ -255,7 +263,7 @@ function print_exit_code {
 function assert_exit_code {
     
     if [ "$FLAG" -eq 0 ];then return; fi
-    
+
     TOTAL=$((TOTAL + 1))
     E=$(print_exit_code $1)
     O=$(print_exit_code $RETVAL)
