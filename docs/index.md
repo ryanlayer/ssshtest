@@ -95,6 +95,7 @@ assert_no_stdout (0)
 
 Assert that stdout is empty
 
+```
 run test_empty_stdout python -c "import sys; sys.stderr.write('aaa')"
 assert_no_stdout
 ```
