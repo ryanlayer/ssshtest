@@ -76,20 +76,6 @@ assert_exit_code $EX_NOINPUT
 run assert_exit_code python -c "import sys; sys.exit(66);"
 assert_exit_code $EX_USAGE 
 
-#assert_fail_to_stderr
-# Success
-run assert_fail_to_stderr python -c "import sys; sys.stderr.write('example assert_no_stderr failure');sys.exit(66)"
-assert_fail_to_stderr $EX_NOINPUT 
-# Fails because the exit code is wrong
-run assert_fail_to_stderr python -c "import sys; sys.stderr.write('example assert_no_stderr failure');sys.exit(65)"
-assert_fail_to_stderr $EX_NOINPUT 
-# Fails because there is something in stdout
-run assert_fail_to_stderr python -c "import sys; print 'something'; sys.stderr.write('example assert_no_stderr failure');sys.exit(66)"
-assert_fail_to_stderr $EX_NOINPUT 
-# Fails because there is nothing in stderr
-run assert_fail_to_stderr python -c "import sys; print 'something'; sys.exit(66)"
-assert_fail_to_stderr $EX_NOINPUT 
-
 #assert_equal
 # Success
 touch test.out

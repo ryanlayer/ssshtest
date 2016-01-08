@@ -195,8 +195,16 @@ function run {
     fi
 
     CMD="$@"
+
+    START=$(date +%s);
     O="$("$@" >$STDOUT_FILE 2>$STDERR_FILE)"
     RETVAL=$?
+    END=$(date +%s);
+    TOTAL=$((END-START))
+
+    RUN_TIME="$TOTAL sec"
+
+
     OUTVAL=`cat $STDOUT_FILE`
     ERRVAL=`cat $STDERR_FILE`
 
@@ -275,12 +283,12 @@ function assert_exit_code {
     if [ $RETVAL -ne $1 ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} EXIT CODE (LINE $LINE): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} EXIT CODE (LINE $LINE): $RUN_NAME in $RUN_TIME"
         echo -e "-->\texpected $E, observed $O"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} EXIT CODE (LINE $LINE): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} EXIT CODE (LINE $LINE): $RUN_NAME in $RUN_TIME"
         if [ $VERBOSE ] 
         then
             echo -e "-->\texpected $E, observed $O"
@@ -300,12 +308,12 @@ function assert_no_stdout {
     if [ -n "$OUTVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} NON-EMPTY STDOUT (LINE $LINE): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} NON-EMPTY STDOUT (LINE $LINE): $RUN_NAME in $RUN_TIME"
         echo -e "-->\t$OUTVAL"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} NON-EMPTY STDOUT (LINE $LINE): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} NON-EMPTY STDOUT (LINE $LINE): $RUN_NAME in $RUN_TIME"
     fi
 }
 #}}}
@@ -321,12 +329,12 @@ function assert_no_stderr {
     if [ -n "$ERRVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} NON-EMPTY STDERR(LINE $LINE): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} NON-EMPTY STDERR(LINE $LINE): $RUN_NAME in $RUN_TIME"
         echo -e "-->\t$ERRVAL"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} EMPTY STDERR(LINE $LINE): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} EMPTY STDERR(LINE $LINE): $RUN_NAME in $RUN_TIME"
     fi
 }
 #}}}
@@ -342,11 +350,11 @@ function assert_stderr {
     if [ -z "$ERRVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} EMPTY STDERR(LINE $LINE): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} EMPTY STDERR(LINE $LINE): $RUN_NAME in $RUN_TIME"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} EMPTY STDERR(LINE $LINE): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} EMPTY STDERR(LINE $LINE): $RUN_NAME in $RUN_TIME"
         if [ $VERBOSE ] 
         then
             echo -e "-->\t$ERRVAL"
@@ -366,11 +374,11 @@ function assert_stdout {
     if [ -z "$OUTVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} EMPTY STDOUT (LINE $LINE): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} EMPTY STDOUT (LINE $LINE): $RUN_NAME in $RUN_TIME"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} NON-EMPTY STDOUT (LINE $LINE): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} NON-EMPTY STDOUT (LINE $LINE): $RUN_NAME in $RUN_TIME"
         if [ $VERBOSE ] 
         then
             echo -e "-->\t$ERRVAL"
@@ -390,20 +398,20 @@ function assert_in_stderr {
     if [ -z "$ERRVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} EMPTY STDERR (LINE $LINE): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} EMPTY STDERR (LINE $LINE): $RUN_NAME in $RUN_TIME"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         if [[ $ERRVAL == *"$1"* ]]
         then
             SUCCESSES=$((SUCCESSES + 1))
-            echo -e "${GREEN}SUCCESS${NC} STDERR CONTAINS \"$1\" (LINE $LINE): $RUN_NAME"
+            echo -e "${GREEN}SUCCESS${NC} STDERR CONTAINS \"$1\" (LINE $LINE): $RUN_NAME in $RUN_TIME"
             if [ $VERBOSE ] 
             then
                 echo -e "-->\t$ERRVAL"
             fi
         else
             FAILS=$((FAILS + 1))
-            echo -e "${RED}FAILURE${NC} STDERR DOES NOT CONTAIN \"$1\" (LINE $LINE): $RUN_NAME"
+            echo -e "${RED}FAILURE${NC} STDERR DOES NOT CONTAIN \"$1\" (LINE $LINE): $RUN_NAME in $RUN_TIME"
             echo -e "-->\t$ERRVAL"
             if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
         fi
@@ -422,20 +430,20 @@ function assert_in_stdout {
     if [ -z "$OUTVAL" ]
     then
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} EMPTY STDOUT (LINE $LINE): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} EMPTY STDOUT (LINE $LINE): $RUN_NAME in $RUN_TIME"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         if [[ $OUTVAL == *"$1"* ]]
         then
             SUCCESSES=$((SUCCESSES + 1))
-            echo -e "${GREEN}SUCCESS${NC} STDOUT CONTAINS \"$1\" (LINE $LINE): $RUN_NAME"
+            echo -e "${GREEN}SUCCESS${NC} STDOUT CONTAINS \"$1\" (LINE $LINE): $RUN_NAME in $RUN_TIME"
             if [ $VERBOSE ] 
             then
                 echo -e "-->\t$OUTVAL"
             fi
         else
             FAILS=$((FAILS + 1))
-            echo -e "${RED}FAILURE${NC} STDOUT DOES NOT CONTAIN \"$1\" (LINE $LINE): $RUN_NAME"
+            echo -e "${RED}FAILURE${NC} STDOUT DOES NOT CONTAIN \"$1\" (LINE $LINE): $RUN_NAME in $RUN_TIME"
             echo -e "-->\t$OUTVAL"
             if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
         fi
@@ -454,22 +462,12 @@ function assert_equal {
     if [ "$1" -eq "$2" ]
     then
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "${GREEN}SUCCESS${NC} \"$1\" == \"$2\" (LINE $LINE): $RUN_NAME"
+        echo -e "${GREEN}SUCCESS${NC} \"$1\" == \"$2\" (LINE $LINE): $RUN_NAME in $RUN_TIME"
     else
         FAILS=$((FAILS + 1))
-        echo -e "${RED}FAILURE${NC} \"$1\" != \"$2\" (LINE $LINE): $RUN_NAME"
+        echo -e "${RED}FAILURE${NC} \"$1\" != \"$2\" (LINE $LINE): $RUN_NAME in $RUN_TIME"
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     fi
 }
 #}}}
 
-#{{{ function assert_fail_to_stderr {
-function assert_fail_to_stderr {
-
-    if [ "$FLAG" -eq 0 ];then return; fi
-
-    assert_exit_code $1 $2
-    assert_no_stdout $2
-    assert_stderr $2
-}
-#}}}
