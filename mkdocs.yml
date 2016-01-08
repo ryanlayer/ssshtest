@@ -1,6 +1,6 @@
 site_name: ssshtest
-site_url: https://github.com/brentp/vcfanno
-repo_url: https://github.com/brentp/vcfanno
+site_url: https://github.com/ryanlayer/ssshtest
+repo_url: https://github.com/ryanlayer/ssshtest
 pages:
 - Home: index.md
 theme: simplex
