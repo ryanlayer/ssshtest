@@ -14,28 +14,54 @@ To use `ssshtest` in your project just source it in your test file
 Then write some tests:
 
 ```
-run python -c "print 'zzz: example success'"
+run test_for_success python -c "print 'zzz: example success'"
 assert_in_stdout "zzz" $LINENO
 
-run python -c "sys.stderr.write('zzz: example failure')"
+run test_for_stderr python -c "sys.stderr.write('zzz: example failure')"
 assert_in_stderr "xxx" $LINENO
 ```
 
 Then simply run the bash file that contains those lines.
 
+```
+$ bash mytests.sh
+```
+
+To run only certain tests, use:
+
+```
+base mytests.sh test_for_success test_42
+```
+
+
 
 Functions
 =========
 
-run (1)
+run (2)
 -------
 
 run a block of code. This must precede any of the testing functions below.
 
 ###Arguments
 
++ name for test.
 + code to run
 
+assert_equal (3)
+----------------
+
+Assert that 2 things are equal:
+
+###Arguments
+
++ observed
++ expected
++ $LINENO
+
+```
+assert_equal 42 $((21 + 21)) $LINENO
+```
 
 assert_stdout (1)
 -----------------
