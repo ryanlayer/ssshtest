@@ -1,2 +1,2 @@
 script:
-    - ./travis-tests.sh
+    - bash travis-tests.sh

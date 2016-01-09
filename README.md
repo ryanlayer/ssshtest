@@ -33,7 +33,7 @@ $ bash mytests.sh
 To run only certain tests, use:
 
 ```
-base mytests.sh test_for_success test_42
+$ bash mytests.sh test_for_success test_42
 ```
 
 

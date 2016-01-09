@@ -2,7 +2,7 @@
 
 test -e ssshtest || wget -q https://raw.githubusercontent.com/ryanlayer/ssshtest/master/ssshtest
 
-. ssshtest
+source ssshtest
 
 set -o nounset
 
