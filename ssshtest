@@ -23,8 +23,8 @@ FAIL="${BRED}FAIL${NC}"
 
 COLS=`tput cols`
 
-STDOUT_FILE=${TMPDIR:-/tmp}/o
-STDERR_FILE=${TMPDIR:-/tmp}/e
+STDOUT_FILE=${TMPDIR:-/tmp}/o.$$
+STDERR_FILE=${TMPDIR:-/tmp}/e.$$
 OUTVAL=
 ERRVAL=
 RETVAL=
