@@ -37,6 +37,7 @@ assert_in_stderr "simple test"
 # Success
 run test_stdout python -c "print 'example assert_stdout success'"
 assert_stdout 
+
 # Fails because there is nothing in stdout
 run test_stdout python -c "import sys; sys.stderr.write('example assert_stdout failure')"
 assert_stdout 
@@ -54,6 +55,7 @@ assert_stderr
 # Success
 run test_no_stdout python -c "import sys; sys.stderr.write('example assert_no_stdout success')"
 assert_no_stdout 
+
 # Fails because there is something in stdout
 run test_no_stdout python -c "print 'example assert_no_stdout failure'"
 assert_no_stdout 
@@ -62,6 +64,7 @@ assert_no_stdout
 # Success
 run test_no_stderr python -c "print 'example assert_no_stderr success'"
 assert_no_stderr 
+
 # Fails because there is something in stderr
 run test_no_stderr python -c "import sys; sys.stderr.write('example assert_no_stderr failure')"
 assert_no_stderr 
@@ -70,8 +73,10 @@ assert_no_stderr
 # Success
 run test_exit_code python -c "print 1;"
 assert_exit_code $EX_OK 
+
 run test_exit_code python -c "import sys; sys.exit(66);"
 assert_exit_code $EX_NOINPUT 
+
 # Fails because the error code is wrong
 run test_exit_code python -c "import sys; sys.exit(66);"
 assert_exit_code $EX_USAGE 
@@ -81,6 +86,7 @@ assert_exit_code $EX_USAGE
 touch test.out
 run test_equal python -c "f = open('test.out','w'); f.write('1\n2\n3\n');f.close();"
 assert_equal "$(cat test.out | wc -l)" 3 
+
 run test_equal python -c "f = open('test.out','w'); f.write('1\n2\n3\n');f.close();"
 # Failure
 assert_equal "$(cat test.out | wc -l)" 4 
