@@ -1,9 +1,7 @@
 ssshtest - **s**tupid **s**imple (ba)**sh** **test**ing
 =======================================================
 
-[![Build Status](https://travis-ci.org/ryanlayer/ssshtest.svg?branch=master)](https://travis-ci.org/ryanlayer/ssshtest)
-
-[docs](http://ryanlayer.github.io/ssshtest/)
+[![Build Status](https://travis-ci.org/ryanlayer/ssshtest.svg?branch=master)](https://travis-ci.org/ryanlayer/ssshtest) [![Docs](https://img.shields.io/badge/docs-latest-blue.svg)](http://ryanlayer.github.io/ssshtest/)
 
 ![example output](https://raw.githubusercontent.com/ryanlayer/ssshtest/master/screenshot.png)
 
