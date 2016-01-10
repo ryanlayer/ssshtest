@@ -81,7 +81,7 @@ assert_exit_code $EX_NOINPUT
 run test_exit_code python -c "import sys; sys.exit(66);"
 assert_exit_code $EX_USAGE 
 
-#assert_equal
+#assert_equal - numbers
 # Success
 touch test.out
 run test_equal python -c "f = open('test.out','w'); f.write('1\n2\n3\n');f.close();"
@@ -90,6 +90,17 @@ assert_equal "$(cat test.out | wc -l)" 3
 run test_equal python -c "f = open('test.out','w'); f.write('1\n2\n3\n');f.close();"
 # Failure
 assert_equal "$(cat test.out | wc -l)" 4 
+rm -f test.out
+
+#assert_equal - strings
+# Success
+touch test.out
+run test_equal python -c "f = open('test.out','w'); f.write('foo\n');f.close();"
+assert_equal "$(cat test.out)" foo
+
+run test_equal python -c "f = open('test.out','w'); f.write('foo\n');f.close();"
+# Failure
+assert_equal "$(cat test.out)" bar
 rm -f test.out
 
 #using STDOUT_FILE

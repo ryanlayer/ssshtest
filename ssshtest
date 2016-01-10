@@ -465,7 +465,7 @@ function assert_equal {
     LINE=$(caller | cut -d " " -f1)
 
     TOTAL=$((TOTAL + 1))
-    if [ "$1" -eq "$2" ]
+    if [ "$1" == "$2" ]
     then
         SUCCESSES=$((SUCCESSES + 1))
         echo -e "$PASS \"$1\" == \"$2\" (LINE $LINE): $RUN_NAME in $RUN_TIME"
