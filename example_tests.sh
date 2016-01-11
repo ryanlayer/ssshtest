@@ -84,26 +84,17 @@ assert_exit_code $EX_USAGE
 #assert_equal - numbers
 # Success
 touch test.out
-run test_equal python -c "f = open('test.out','w'); f.write('1\n2\n3\n');f.close();"
+run test_assert_equal python -c "f = open('test.out','w'); f.write('1\n2\n3\n');f.close();"
 assert_equal "$(cat test.out | wc -l)" 3 
-
-run test_equal python -c "f = open('test.out','w'); f.write('1\n2\n3\n');f.close();"
-# Failure
-assert_equal "$(cat test.out | wc -l)" 4 
-rm -f test.out
-
-#assert_equal - strings
-# Success
-touch test.out
-run test_equal python -c "f = open('test.out','w'); f.write('foo\n');f.close();"
-assert_equal "$(cat test.out)" foo
-
-run test_equal python -c "f = open('test.out','w'); f.write('foo\n');f.close();"
-# Failure
-assert_equal "$(cat test.out)" bar
+assert_equal "$(cat test.out | wc -l | awk '{print $1;}')" 3 
+# Failture
+assert_equal "$(cat test.out | wc -l | awk '{print $1;}')" 4 
 rm -f test.out
 
 #using STDOUT_FILE
 run use_stdout_file python -c "print '1\n2\n3';"
 assert_equal "$(cat $STDOUT_FILE | wc -l)" 3 
+assert_no_stderr
+assert_no_stdout
+
 
