@@ -130,7 +130,7 @@
 
 <h1 id="ssshtest-stupid-simple-bash-testing">ssshtest - <strong>s</strong>tupid <strong>s</strong>imple (ba)<strong>sh</strong> <strong>test</strong>ing</h1>
 <p><a href="https://travis-ci.org/ryanlayer/ssshtest"><img alt="Build Status" src="https://travis-ci.org/ryanlayer/ssshtest.svg?branch=master" /></a> <a href="http://ryanlayer.github.io/ssshtest/"><img alt="Docs" src="https://img.shields.io/badge/docs-latest-blue.svg" /></a></p>
-<p><img alt="example output" src="https://raw.githubusercontent.com/ryanlayer/ssshtest/master/screenshot.png" /></p>
+<p><img alt="example output" src="https://raw.githubusercontent.com/ryanlayer/ssshtest/master/docs/screenshot.png" /></p>
 <p><code>ssshtest</code> is designed to be practical and easy to use.</p>
 <p>To use <code>ssshtest</code> in your project just source it in your test file</p>
 <pre><code>test -e ssshtest || wget -q https://raw.githubusercontent.com/ryanlayer/ssshtest/master/ssshtest
@@ -150,7 +150,7 @@ assert_in_stderr &quot;xxx&quot;
 </code></pre>
 
 <p>To run only certain tests, use:</p>
-<pre><code>base mytests.sh test_for_success test_42
+<pre><code>$ bash mytests.sh test_for_success test_42
 </code></pre>
 
 <p>For an example of how to use <strong>travis</strong> continuous integration tests, our <a href="https://github.com/ryanlayer/ssshtest/blob/master/.travis.yml">.travis.yml</a></p>
@@ -163,7 +163,8 @@ assert_in_stderr &quot;xxx&quot;
 <li>code to run</li>
 </ul>
 <h2 id="assert_equal-2">assert_equal (2)</h2>
-<p>Assert that 2 things are equal:</p>
+<p>Assert that 2 things are equal.
+This does a string comparison so assert_equal "2" "  2" will fail.</p>
 <h3 id="arguments_1">Arguments</h3>
 <ul>
 <li>observed</li>
