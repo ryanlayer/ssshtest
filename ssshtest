@@ -18,8 +18,8 @@ BLUE='\033[0;33m'
 BOLD='\033[0;1m'
 NC='\033[0m' # No Color
 
-PASS="${BGREEN}PASS${NC}"
-FAIL="${BRED}FAIL${NC}"
+PASS=" ${BGREEN}PASS${NC}"
+FAIL=" ${BRED}FAIL${NC}"
 
 COLS=`tput cols`
 

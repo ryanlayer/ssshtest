@@ -3,7 +3,7 @@ ssshtest - **s**tupid **s**imple (ba)**sh** **test**ing
 
 [![Build Status](https://travis-ci.org/ryanlayer/ssshtest.svg?branch=master)](https://travis-ci.org/ryanlayer/ssshtest) [![Docs](https://img.shields.io/badge/docs-latest-blue.svg)](http://ryanlayer.github.io/ssshtest/)
 
-![example output](https://raw.githubusercontent.com/ryanlayer/ssshtest/master/screenshot.png)
+![example output](https://raw.githubusercontent.com/ryanlayer/ssshtest/master/docs/screenshot.png)
 
 `ssshtest` is designed to be practical and easy to use.
 
@@ -58,7 +58,8 @@ run a block of code. This must precede any of the testing functions below.
 assert_equal (2)
 ----------------
 
-Assert that 2 things are equal:
+Assert that 2 things are equal.
+This does a string comparison so assert_equal "2" "  2" will fail.
 
 ###Arguments
 
