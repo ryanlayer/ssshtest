@@ -8,6 +8,9 @@
 # (c) 2015 - Ryan Layer, Brent Pedersen
 ############################################################
 
+PROGRAM_NAME=sshtest
+VERSION=0.1.5
+
 RED='\033[0;31m'
 BRED='\033[1;31m' # bold
 
@@ -148,7 +151,7 @@ EX_CONFIG=78
 function report {
     rm -f $STDOUT_FILE $STDERR_FILE
 
-    echo 
+    echo -e "\n$PROGRAM_NAME v$VERSION\n"
 
     if [ "$STOP_ON_FAIL" -ne "0" ]
     then
