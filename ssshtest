@@ -219,9 +219,10 @@ function run {
 
     #make it pretty
     RUN_NAME=${BOLD}$RUN_NAME${NC}
-
-
-    echo -e "\n$RUN_NAME ran in $RUN_TIME"
+	ELINES=$(wc -l $STDERR_FILE | awk '{print $1 }' &)
+	OLINES=$(wc -l $STDOUT_FILE | awk '{print $1 }' &)
+	wait
+    echo -e "\n$RUN_NAME ran in $RUN_TIME with $ELINES/$OLINES lines to STDERR/OUT"
 }
 #}}}
 
