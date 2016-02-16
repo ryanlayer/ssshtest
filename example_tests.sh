@@ -97,4 +97,11 @@ assert_equal "$(cat $STDOUT_FILE | wc -l)" 3
 assert_no_stderr
 #assert_no_stdout
 
+fn() {
+	echo "hello" | head
+	echo "err22" 1>&2
+}
 
+run use_pipes fn
+assert_in_stderr "err22"
+assert_in_stdout "hello"
