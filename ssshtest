@@ -172,6 +172,8 @@ function report {
         printf "${BGREEN}%-10s${NC}${BOLD}Successes${NC}\n" $SUCCESSES
     fi
 
+    tear_down
+
     exit $FAILS
 }
 #}}}
@@ -298,6 +300,7 @@ function assert_exit_code {
         FAILS=$((FAILS + 1))
         echo -e "$FAIL EXIT CODE (LINE $LINE)"
         echo -e "-->\texpected $E, observed $O"
+        cat $STDERR_FILE | head 
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
@@ -323,6 +326,7 @@ function assert_no_stdout {
         FAILS=$((FAILS + 1))
         echo -e "$FAIL NON-EMPTY STDOUT (LINE $LINE)"
         echo -e "-->\t$OUTVAL"
+        cat $STDERR_FILE | head 
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
@@ -344,6 +348,7 @@ function assert_no_stderr {
         FAILS=$((FAILS + 1))
         echo -e "$FAIL NON-EMPTY STDERR(LINE $LINE)"
         echo -e "-->\t$ERRVAL"
+        cat $STDERR_FILE | head 
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
@@ -364,6 +369,7 @@ function assert_stderr {
     then
         FAILS=$((FAILS + 1))
         echo -e "$FAIL EMPTY STDERR(LINE $LINE)"
+        cat $STDERR_FILE | head 
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
@@ -388,6 +394,7 @@ function assert_stdout {
     then
         FAILS=$((FAILS + 1))
         echo -e "$FAIL EMPTY STDOUT (LINE $LINE)"
+        cat $STDERR_FILE | head 
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
@@ -412,6 +419,7 @@ function assert_in_stderr {
     then
         FAILS=$((FAILS + 1))
         echo -e "$FAIL EMPTY STDERR (LINE $LINE)"
+        cat $STDERR_FILE | head 
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         if [[ $ERRVAL == *"$1"* ]]
@@ -426,6 +434,7 @@ function assert_in_stderr {
             FAILS=$((FAILS + 1))
             echo -e "$FAIL STDERR DOES NOT CONTAIN \"$1\" (LINE $LINE)"
             echo -e "-->\t$ERRVAL"
+            cat $STDERR_FILE | head 
             if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
         fi
     fi
@@ -444,6 +453,7 @@ function assert_in_stdout {
     then
         FAILS=$((FAILS + 1))
         echo -e "$FAIL EMPTY STDOUT (LINE $LINE)"
+        cat $STDERR_FILE | head 
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         if [[ $OUTVAL == *"$1"* ]]
@@ -458,6 +468,7 @@ function assert_in_stdout {
             FAILS=$((FAILS + 1))
             echo -e "$FAIL STDOUT DOES NOT CONTAIN \"$1\" (LINE $LINE)"
             echo -e "-->\t$OUTVAL"
+            cat $STDERR_FILE | head 
             if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
         fi
     fi
@@ -479,6 +490,7 @@ function assert_equal {
     else
         FAILS=$((FAILS + 1))
         echo -e "$FAIL \"$1\" != \"$2\" (LINE $LINE)"
+        cat $STDERR_FILE | head 
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     fi
 }
@@ -503,8 +515,15 @@ function assert_true {
     else
         FAILS=$((FAILS + 1))
         echo -e "$FAIL $* (LINE $LINE)"
+        cat $STDERR_FILE | head 
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     fi
 }
 #}}}
 
+#{{{function tear_down 
+function tear_down 
+{
+    #define this function in your test to clean things up in the end
+}
+#}}}
