@@ -524,6 +524,7 @@ function assert_true {
 #{{{function tear_down 
 function tear_down 
 {
+    :
     #define this function in your test to clean things up in the end
 }
 #}}}
