@@ -330,7 +330,7 @@ function assert_no_stdout {
         if [ $STOP_ON_FAIL -ne "0" ];then exit; fi
     else
         SUCCESSES=$((SUCCESSES + 1))
-        echo -e "$PASS NON-EMPTY STDOUT (LINE $LINE)"
+        echo -e "$PASS EMPTY STDOUT (LINE $LINE)"
     fi
 }
 #}}}
