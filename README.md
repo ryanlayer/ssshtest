@@ -172,6 +172,35 @@ STDERR_FILE
 
 `$STDERR_FILE` is a file containing the $STDERR from the last run command
 
+`$test_name`
+-----------
+`ssshtest` allows you to run a subset of the tests in your test file, and an
+environment variable is set for to each test that is set to run.  You can use
+this variable to prevent lines associated with a test from running when the
+test not set to run. For example, the following test creates the file
+`test.txt`. 
+
+```
+rm -f test.txt
+run write_test \
+    python -c 'f=open("test.txt","w");f.write("test\n");f.close()'
+assert_equal "test" $( cat test.txt )
+```
+
+If this test is not run the file is not created, and when the shell attempts to
+resolve `$( cat test.txt )` the error `cat: test.txt: No such file or
+directory` occurs.
+
+You can prevent this error by putting a test-specific guard around the assert.
+
+```
+rm -f test.txt
+run write_test \
+    python -c 'f=open("test.txt","w");f.write("test\n");f.close()'
+if [ $write_test ]; then
+    assert_equal "test" $( cat test.txt )
+fi
+```
 
 LICENSE
 =======
