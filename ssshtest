@@ -203,6 +203,8 @@ function run {
     if [ "$FLAG" -eq 0 ]
     then
         return
+    else
+        export $RUN_NAME=1
     fi
 
     CMD="$@"
