@@ -50,7 +50,7 @@ run (2)
 
 run a block of code. This must precede any of the testing functions below.
 
-###Arguments
+### Arguments
 
 + name for test.
 + code to run
@@ -61,7 +61,7 @@ assert_equal (2)
 Assert that 2 things are equal.
 This does a string comparison so assert_equal "2" "  2" will fail.
 
-###Arguments
+### Arguments
 
 + observed
 + expected
@@ -90,7 +90,7 @@ run test_in_stdout python -c "print 'zzz: example success'"
 assert_in_stdout "zzz"
 ```
 
-###Arguments
+### Arguments
 
 + text to match
 
@@ -121,7 +121,7 @@ assert_in_stderr (1)
 
 Assert that stderr out contains this text.
 
-###Arguments
+### Arguments
 
 + text to match
 
@@ -145,7 +145,7 @@ assert_exit_code (1)
 
 Assert that the program exited with a particular code
 
-###Arguments
+### Arguments
 
 + exit code
 
