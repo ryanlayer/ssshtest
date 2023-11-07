@@ -501,7 +501,7 @@ function assert_true {
 
     COMMAND=("$@")
     RES=`${COMMAND[@]}`
-    echo $RES || "AAAAAAAAAAA"
+    echo $RES > /dev/null 2>&1 || "AAAAAAAAAAA"
 
     if [ "$FLAG" -eq 0 ];then return; fi
 
